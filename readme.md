@@ -22,8 +22,8 @@ This project is a challenge to create a complete website using a unique stack co
 
 1. Clone the repository:
    ```bash
-   git clone <your-repo-url>
-   cd <your-repo-folder>
+   git clone https://github.com/Tony-ArtZ/htmx-fastapi
+   cd htmx-fastapi
    ```
 
 2. Install the required dependencies:
