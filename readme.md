@@ -5,6 +5,7 @@ This project is a challenge to create a complete website using a unique stack co
 - **HTMX** for frontend interactions
 - **Jinja Templates** for HTML rendering
 - **FastAPI** as the backend framework
+- **SASS** for styling
 - **PostgreSQL** as the database
 - **SQLAlchemy** for ORM
 - **Websockets** for real-time group chat functionality
