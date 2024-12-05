@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <link rel="stylesheet" href="static/stylesheets/style.css" />
+    <title>HTMX Test</title>
+  </head>
+  <body class="center" hx-ext="ws" ws-connect="/chat">
+    <img src="static/images/welcome.png" alt="logo" />
+    <div class="main-container">
+      <a href="/auth/login">
+        <button class="glow-button">Login</button>
+      </a>
+      <a href="/auth/register">
+        <button class="glow-button">Register</button>
+      </a>
+    </div>
+  </body>
+</html>

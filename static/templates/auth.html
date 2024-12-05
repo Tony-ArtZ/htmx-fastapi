@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+    <link rel="stylesheet" href="static/stylesheets/style.css" />
+    <title>Document</title>
+  </head>
+  <body style="justify-content: start" hx-ext="ws" ws-connect="/chat">
+    <nav class="navbar">
+      <img src="static/images/logo.png" alt="logo" />
+      <div class="nav-links">
+        <button hx-get="/home" hx-target="#content" hx-swap="outerHtml">
+          Home
+        </button>
+        <button hx-get="/about" hx-target="#content" hx-swap="outerHtml">
+          About
+        </button>
+        <button class="glow-button" hx-get="/auth/logout" hx-trigger="click">
+          Logout
+        </button>
+      </div>
+    </nav>
+    <div id="content">{% include 'templates/home.html' %}</div>
+  </body>
+</html>

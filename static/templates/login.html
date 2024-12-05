@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <link rel="stylesheet" href="/static/stylesheets/style.css" />
+    <title>Login</title>
+  </head>
+  <body class="center">
+    <div class="login-container">
+      <h2>Login</h2>
+      <form
+        hx-post="/auth/login"
+        hx-trigger="submit"
+        hx-swap="innerHtml"
+        hx-target="#errors"
+      >
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+        />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+        <div id="errors"></div>
+        <button type="submit" class="glow-button">Log In</button>
+      </form>
+    </div>
+    <a href="/auth/register">Don't have an account? Register</a>
+  </body>
+</html>

@@ -1,0 +1,478 @@
+$primary-color: #ff00ff; // Neon pink
+$secondary-color: #00ffff; // Cyan
+$background-color: #0c0c2c; // Deep blue
+$text-color: #ffffff;
+
+@keyframes neonGlow {
+  0% {
+    text-shadow: 0 0 10px $primary-color, 0 0 20px $primary-color,
+      0 0 30px $primary-color;
+  }
+  100% {
+    text-shadow: 0 0 20px $primary-color, 0 0 30px $primary-color,
+      0 0 40px $primary-color;
+  }
+}
+
+@keyframes colorBleed {
+  0% {
+    text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  50% {
+    text-shadow: 2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
+      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+  100% {
+    text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px;
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@mixin glowText($color) {
+  color: $color;
+  text-shadow: 0 0 10px $color, 0 0 20px $color, 0 0 30px $color;
+}
+
+* {
+  animation: colorBleed 10s infinite;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background-color: $background-color;
+  background-image: url("/static//images/bg.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin: 0;
+  &::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle,
+      transparent 60%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // Bezel effect
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to right,
+        #000 0%,
+        transparent 5%,
+        transparent 95%,
+        #000 100%
+      ),
+      linear-gradient(
+        to bottom,
+        #000 0%,
+        transparent 5%,
+        transparent 95%,
+        #000 100%
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 80%,
+    rgba(0, 0, 0, 0.08) 80%
+  );
+  background-size: 100% 4px;
+  animation: scanlines 1s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.main-container {
+  background-color: rgba(12, 12, 44, 0.7);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  border: 2px solid $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 300px;
+  gap: 2rem;
+
+  a {
+    width: 100%;
+  }
+}
+
+.glow-button {
+  background-color: $primary-color;
+  color: $text-color;
+  border: none;
+  padding: 0.75rem;
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
+  text-decoration: none;
+  &:hover {
+    background-color: $secondary-color;
+    color: $background-color;
+    box-shadow: 0 0 15px $secondary-color;
+  }
+}
+
+.login-container {
+  background-color: rgba(12, 12, 44, 0.7);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  width: 300px;
+  border: 2px solid $primary-color;
+
+  h2 {
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    animation: neonGlow 1.5s ease-in-out infinite alternate;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid $secondary-color;
+      border-radius: 4px;
+      color: $text-color;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+}
+
+.errors {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: $secondary-color;
+  font-weight: bold;
+  text-shadow: 0 0 10px $secondary-color, 0 0 20px $secondary-color,
+    0 0 30px $secondary-color;
+
+  &:hover {
+    text-shadow: 0 0 20px $secondary-color, 0 0 30px $secondary-color,
+      0 0 40px $secondary-color;
+  }
+}
+
+.navbar {
+  width: 100vw;
+  background-color: $background-color;
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  opacity: 0.9;
+  backdrop-filter: blur(10px);
+
+  img {
+    width: 220px;
+    padding-left: 24px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1rem;
+    margin-right: 1rem;
+
+    button {
+      color: $primary-color;
+      text-decoration: none;
+      background-color: transparent;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px $primary-color, 0 0 20px $primary-color,
+        0 0 30px $primary-color;
+
+      &:hover {
+        text-shadow: 0 0 20px $primary-color, 0 0 30px $primary-color,
+          0 0 40px $primary-color;
+      }
+    }
+  }
+}
+
+.about-section {
+  background-color: $background-color;
+  color: $text-color;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+
+  h2 {
+    @include glowText($primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+
+    .tech-item {
+      padding: 0.8rem 1.5rem;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      border: 2px solid $secondary-color;
+      transition: all 0.3s ease;
+      animation: floatAnimation 3s ease-in-out infinite;
+      position: relative;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+        border-color: $primary-color;
+        box-shadow: 0 0 20px $primary-color;
+        
+        i {
+          animation: iconSpin 1s linear infinite;
+          color: $primary-color;
+        }
+      }
+
+      i {
+        margin-right: 8px;
+        font-size: 1.2em;
+        color: $secondary-color;
+        transition: all 0.3s ease;
+      }
+
+      &:nth-child(2n) {
+        animation-delay: 0.5s;
+      }
+
+      &:nth-child(3n) {
+        animation-delay: 1s;
+      }
+    }
+  }
+
+  .social-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 2rem;
+
+    a {
+      @include glowText($secondary-color);
+      border: 2px solid $secondary-color;
+      box-shadow: 0 0 5px $secondary-color;
+      text-decoration: none;
+      border-radius: 25px;
+      padding: 0.8rem 2rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.2);
+
+      i {
+        font-size: 1.4rem;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        border-color: $primary-color;
+        @include glowText($primary-color);
+        box-shadow: 0 0 20px $primary-color;
+        background: rgba(255, 0, 255, 0.1);
+
+        i {
+          transform: scale(1.2) rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+#content {
+  width: 80vw;
+  padding-top: 30px;
+  height: 80vh;
+  display: flex;
+}
+
+.chat-container {
+  width: 100%;
+  height: 100%;
+  background-color: $background-color;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 20px $primary-color;
+
+  .chat-header {
+    @include glowText($primary-color);
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    animation: neonGlow 1.5s ease-in-out infinite alternate;
+  }
+  
+  .chat-messages {
+    height: 100%;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  .message {
+    margin-bottom: 20px;
+    padding: 15px;
+    color: $text-color;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba($primary-color, 0.3);
+    border: 1px solid rgba($primary-color, 0.5);
+
+    .message-content {
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      @include glowText($text-color);
+    }
+
+    .message-metadata {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      opacity: 0.7;
+
+      .message-email {
+        @include glowText($secondary-color);
+      }
+
+      .message-timestamp {
+        @include glowText($primary-color);
+      }
+    }
+  }
+
+  .message-input {
+    display: flex;
+    gap: 10px;
+  }
+
+  input {
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: $text-color;
+    font-family: inherit;
+  }
+
+  button {
+    background-color: $secondary-color;
+    color: $background-color;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $primary-color;
+      box-shadow: 0 0 10px $primary-color;
+    }
+  }
+}
